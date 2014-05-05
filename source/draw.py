@@ -13,16 +13,22 @@ def draw():
     
     # Drawing a sprite called my_sprite
     # my_sprite.draw()
-    game.player.draw()
+    if game.player.alive:
+        game.player.draw()
 
-    for baddie in game.baddies:
-        baddie.draw()
-    for coin in game.coins:
-        coin.draw()
+    if game.player.alive:
+        for baddie in game.baddies:
+            baddie.draw()
+        for coin in game.coins:
+            coin.draw()
 
     # Draw some text
     # graphics.draw_text("Hello World", (255, 255, 255), (50, 50))
-    graphics.draw_text("Score: " + str(game.score), (255,255,255), (10,10))
+    if game.player.alive:
+        graphics.draw_text("Score: " + str(game.score), (255,255,255), (10,10))
+    else:
+        graphics.draw_text("Final Score: " + str(game.score), (255,255,255), (250,275))
+        graphics.draw_text("PRESS SPACE TO PLAY AGAIN", (255,255,255), (190,325))
 
     return
 

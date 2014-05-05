@@ -3,7 +3,6 @@ import game
 from sprite import Sprite
 from random import randint
 
-
 def update(keys):
     """
     Update game world here
@@ -11,18 +10,18 @@ def update(keys):
 
     for key in keys:
         if key == pygame.K_LEFT:
-            game.player.move(-3,0)
+            game.player.move(-4,0)
         if key == pygame.K_RIGHT:
-            game.player.move(3,0)
+            game.player.move(4,0)
         if key == pygame.K_UP:
-            game.player.move(0,-3)
+            game.player.move(0,-4)
         if key == pygame.K_DOWN:
-            game.player.move(0,3)
+            game.player.move(0,4)
 
     if randint(0,25) == 1:
         game.baddies.append(Sprite("baddie.png",(randint(0,24) * 25,-50)))
 
-    if randint(0,100) == 1:
+    if randint(0,75) == 1:
         game.coins.append(Sprite("coin.png",(randint(0,24) * 25, -25)))
 
     # Keeps player inside of the window
@@ -35,6 +34,7 @@ def update(keys):
     if game.player.rect.bottom >= game.window_size[1]:
         game.player.rect.bottom = game.window_size[1]
 
+    # Speed is based on score
     if game.score >= 10:
         game.speed = game.score/10
 
@@ -44,8 +44,7 @@ def update(keys):
         if baddie.rect.y >= game.window_size[1]:
             game.baddies.remove(baddie)
         if game.player.rect.colliderect(baddie):
-            raise SystemExit, "Final Score: " + str(game.score)
-            # Use a deathscreen
+            game.player.alive = False
 
 
     # Coin Logic
@@ -55,6 +54,8 @@ def update(keys):
             game.coins.remove(coin)
         if game.player.rect.colliderect(coin):
             game.coins.remove(coin)
+            game.coin.play()
             game.score += 1
 
     return
+

@@ -2,7 +2,7 @@
 # Dodge!
 # Copyright 2014, Brandon Bench
 # 
-# Version 0.9
+# Version 1.5
 #
 
 import sys, pygame
@@ -23,7 +23,8 @@ def init():
 
     # Example:
     # game.my_sprite = Sprite("filename.png", (50, 50))
-    game.player = Sprite("player.png", (0,540))
+    game.player = Sprite("player.png", (290,540))
+    game.player.alive = True
 
     game.coins = []
     game.baddies = []
@@ -33,12 +34,32 @@ def init():
     # Play a sound!
     # game.coin = Sound("coin.wav") <-- make sure your file is supported!
     # game.coin.play()
+    game.coin = Sound("coin.wav")
+    game.boom = Sound("boom.wav")
 
     # Drop those jams!
     # game.music = Music("music.ogg") <-- Make sure your file is supported!
     # game.music.play()
 
     return
+
+def deathscreen():
+    game.boom.play()
+    for coin in game.coins:
+        game.coins.remove(coin)
+    for baddie in game.baddies:
+        game.baddies.remove(baddie)
+
+    while True:
+        draw()
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                main()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                sys.exit()
+            if event.type == pygame.QUIT: 
+                sys.exit()
+
 
 # Don't mess with me unless you know what you're doing
 def main():
@@ -63,8 +84,11 @@ def main():
             if event.type == pygame.KEYUP: keys.discard(event.key)
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE: sys.exit()
 
-        update(keys)        # update.py
-        draw()              # draw.py
+        if game.player.alive:
+            update(keys)        # update.py
+            draw()              # draw.py
+        else:
+            deathscreen()
         
         # Simply flips the display for drawing
         pygame.display.update()

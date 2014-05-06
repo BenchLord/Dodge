@@ -24,9 +24,9 @@ def update(keys):
         game.baddies.append(Sprite("obstacle.png",(randint(0,25) * 24,-25), 'x'))
 
     if randint(0,12) == 1:
-        game.baddies.append(Sprite("obstacle.png",(-25, randint(0,24) * 25), 'y'))
+        game.baddies.append(Sprite("obstacle.png",(-25, randint(-50,24) * 25), 'y'))
     if randint(0,12) == 1:
-        game.baddies.append(Sprite("obstacle.png",(game.window_size[0]+25, randint(0,24) * 25), '-y'))
+        game.baddies.append(Sprite("obstacle.png",(game.window_size[0]+25, randint(0,24) * 30), '-y'))
 
     # Collectable spawn
     if randint(0,75) == 1:

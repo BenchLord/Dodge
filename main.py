@@ -75,7 +75,7 @@ def main():
     """
 
     # Set up pygame
-    pygame.init()
+    pygame.init()                                          #PYGAME.DOUBLEBUF
     pygame.mixer.init()                                    #pygame.FULLSCREEN
     game.screen = pygame.display.set_mode(game.window_size, pygame.FULLSCREEN)
     keys = set()

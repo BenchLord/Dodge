@@ -18,14 +18,10 @@ def update(keys):
             game.player.move(0,-3)
         if key == pygame.K_DOWN or key == pygame.K_s:
             game.player.move(0,3)
-        if key == pygame.K_SPACE:
-            pass
-            # need pause!
-
 
     # Obstacle spawn       
     if randint(0,25) == 1:
-        game.baddies.append(Sprite("obstacle.png",(randint(0,24) * 25,-25), 'x'))
+        game.baddies.append(Sprite("obstacle.png",(randint(0,25) * 24,-25), 'x'))
 
     if randint(0,12) == 1:
         game.baddies.append(Sprite("obstacle.png",(-25, randint(0,24) * 25), 'y'))

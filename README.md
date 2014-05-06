@@ -6,7 +6,7 @@ A simple game made with pygame and Cobra starter kit
 Instructions
 ===
 * Collect Stars
-* Dodge the astariods
+* Dodge the Asteroids
 
 Controls
 ===
@@ -15,6 +15,7 @@ Controls
 Team
 ===
 * Brandon Bench
+* Josh Beitler (made the starter kit that Cobra is based on)
 
 Ideas?
 ===

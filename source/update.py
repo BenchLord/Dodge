@@ -8,21 +8,33 @@ def update(keys):
     Update game world here
     """
 
+    # Player movement
     for key in keys:
-        if key == pygame.K_LEFT:
-            game.player.move(-4,0)
-        if key == pygame.K_RIGHT:
-            game.player.move(4,0)
-        if key == pygame.K_UP:
-            game.player.move(0,-4)
-        if key == pygame.K_DOWN:
-            game.player.move(0,4)
+        if key == pygame.K_LEFT or key == pygame.K_a:
+            game.player.move(-3,0)
+        if key == pygame.K_RIGHT or key == pygame.K_d:
+            game.player.move(3,0)
+        if key == pygame.K_UP or key == pygame.K_w:
+            game.player.move(0,-3)
+        if key == pygame.K_DOWN or key == pygame.K_s:
+            game.player.move(0,3)
+        if key == pygame.K_SPACE:
+            pass
+            # need pause!
 
+
+    # Obstacle spawn       
     if randint(0,25) == 1:
-        game.baddies.append(Sprite("baddie.png",(randint(0,24) * 25,-50)))
+        game.baddies.append(Sprite("obstacle.png",(randint(0,24) * 25,-25), 'x'))
 
+    if randint(0,12) == 1:
+        game.baddies.append(Sprite("obstacle.png",(-25, randint(0,24) * 25), 'y'))
+    if randint(0,12) == 1:
+        game.baddies.append(Sprite("obstacle.png",(game.window_size[0]+25, randint(0,24) * 25), '-y'))
+
+    # Collectable spawn
     if randint(0,75) == 1:
-        game.coins.append(Sprite("coin.png",(randint(0,24) * 25, -25)))
+        game.coins.append(Sprite("coin.png",(randint(0,24) * 25, -25), 'x'))
 
     # Keeps player inside of the window
     if game.player.rect.left <= 0:
@@ -38,12 +50,27 @@ def update(keys):
     if game.score >= 10:
         game.speed = game.score/10
 
-    # Baddie Logic
+    # Obstacle Logic
     for baddie in game.baddies:
-        baddie.rect.y += game.speed
-        if baddie.rect.y >= game.window_size[1]:
-            game.baddies.remove(baddie)
+        if baddie.align == "x":
+            baddie.rect.y += game.speed
+            if baddie.rect.y >= game.window_size[1]:
+                game.baddies.remove(baddie)
+
+        if baddie.align == "y":
+            baddie.rect.x += game.speed
+            baddie.rect.y += game.speed
+            if baddie.rect.x >= game.window_size[0]:
+                game.baddies.remove(baddie)
+
+        if baddie.align == "-y":
+            baddie.rect.x -= game.speed
+            baddie.rect.y += game.speed
+            if baddie.rect.x <= 0:
+                game.baddies.remove(baddie)
+
         if game.player.rect.colliderect(baddie):
+            game.boom.play()
             game.player.alive = False
 
 
@@ -56,6 +83,17 @@ def update(keys):
             game.coins.remove(coin)
             game.coin.play()
             game.score += 1
+
+    # Keep them backgrounds moving
+    game.background.move(0,1)
+    game.background2.move(0,1)
+
+    # There is probably a better way to do this...
+    if game.background.rect.top >= 600:
+        game.background.rect.bottom = 0
+    if game.background2.rect.top >= 600:
+        game.background2.rect.bottom = 0
+
 
     return
 

@@ -2,12 +2,13 @@ import pygame
 import game
 
 class Sprite(pygame.sprite.Sprite):
-    def __init__(self, texture, position):
+    def __init__(self, texture, position, align):
         self.image 	= pygame.image.load(game.rpath + texture)
         self.rect 	= self.image.get_rect()
      	self.rect.x = position[0]
      	self.rect.y = position[1]
         self.alive  = False
+        self.align  = align
         return
 
     def draw(self):

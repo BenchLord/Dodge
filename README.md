@@ -1,13 +1,22 @@
 Dodge!
 ===
 A simple game made with pygame and Cobra starter kit
+<img src="resources/screenshot.png">
 
 Instructions
 ===
-*Collect Coins
+* Collect Stars
+* Dodge the astariods
 
-*If you touch the black rectangles, you lose!
+Controls
+===
+* Arrow keys and WASD to move
 
 Team
 ===
-*Brandon Bench
+* Brandon Bench
+
+Ideas?
+===
+Send me an email!
+Benchlord@gmail.com

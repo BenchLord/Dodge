@@ -23,8 +23,8 @@ class Music():
     def __init__(self, filename):
         pygame.mixer.music.load(game.rpath + filename)
 
-    def play(self):
-        pygame.mixer.music.play()
+    def play(self,loop):
+        pygame.mixer.music.play(loop)
 
     def stop(self):
         pygame.mixer.music.stop()

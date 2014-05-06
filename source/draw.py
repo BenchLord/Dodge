@@ -9,8 +9,9 @@ def draw():
     """
 
     # Draw background
-    game.screen.fill((0, 0, 255))
-    
+    game.background.draw()
+    game.background2.draw()
+
     # Drawing a sprite called my_sprite
     # my_sprite.draw()
     if game.player.alive:
@@ -27,8 +28,8 @@ def draw():
     if game.player.alive:
         graphics.draw_text("Score: " + str(game.score), (255,255,255), (10,10))
     else:
-        graphics.draw_text("Final Score: " + str(game.score), (255,255,255), (250,275))
-        graphics.draw_text("PRESS SPACE TO PLAY AGAIN", (255,255,255), (190,325))
+        graphics.draw_text("Final Score: " + str(game.score), (255,255,255), (210,275))
+        graphics.draw_text("PRESS SPACE TO PLAY AGAIN", (255,255,255), (100,325))
 
     return
 

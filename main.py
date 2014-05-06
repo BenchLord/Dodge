@@ -18,13 +18,16 @@ def init():
     resources
     """
 
-    # Simple 8-bit font. Test me out in draw.py
-    game.main_font   = pygame.font.Font("resources/main_font.ttf", 18)
+    # Game font
+    game.main_font   = pygame.font.Font("resources/Coluna.otf", 50)
 
     # Example:
     # game.my_sprite = Sprite("filename.png", (50, 50))
-    game.player = Sprite("player.png", (290,540))
+    game.player = Sprite("ship.png", (290,540), 0)
     game.player.alive = True
+
+    game.background = Sprite("background.jpg", (0,0), 0)
+    game.background2 = Sprite("background.jpg", (0,-600), 0)
 
     game.coins = []
     game.baddies = []
@@ -40,11 +43,15 @@ def init():
     # Drop those jams!
     # game.music = Music("music.ogg") <-- Make sure your file is supported!
     # game.music.play()
+    game.jams = Music("space.wav")
+    game.jams.play(-1)
+
+    pygame.display.set_caption("Dodge!")
 
     return
 
 def deathscreen():
-    game.boom.play()
+    # Removes all coins and obstacles
     for coin in game.coins:
         game.coins.remove(coin)
     for baddie in game.baddies:
@@ -69,8 +76,8 @@ def main():
 
     # Set up pygame
     pygame.init()
-    pygame.mixer.init()
-    game.screen = pygame.display.set_mode(game.window_size, pygame.DOUBLEBUF)
+    pygame.mixer.init()                                    #pygame.FULLSCREEN
+    game.screen = pygame.display.set_mode(game.window_size, pygame.FULLSCREEN)
     keys = set()
 
     # Set up game

@@ -31,11 +31,14 @@ def update(keys):
     # Collectable spawn
     if randint(0,75) == 1:
         game.coins.append(Sprite("coin.png",(randint(0,24) * 25, -25), 'x'))
+<<<<<<< HEAD
     if randint(0,200) == 1:
         game.coins.append(Sprite("coin2.png",(randint(0,24) * 25, -25), 'x'))
     if randint(0,1000) == 1:
         game.coins.append(Sprite("coin3.png",(randint(0,24) * 25, -25), 'x'))
 
+=======
+>>>>>>> e912b0e9c048cf12b05069addab8840d86a91706
 
     # Keeps player inside of the window
     if game.player.rect.left <= 0:
@@ -70,7 +73,11 @@ def update(keys):
             if baddie.rect.x <= 0:
                 game.baddies.remove(baddie)
 
+<<<<<<< HEAD
         if game.player.rect.colliderect(baddie.rect.inflate(-7,-7)):
+=======
+        if game.player.rect.colliderect(baddie):
+>>>>>>> e912b0e9c048cf12b05069addab8840d86a91706
             game.boom.play()
             game.player.alive = False
 
@@ -90,6 +97,17 @@ def update(keys):
                 game.score += 5
             else:
                 game.score += 1
+
+    # Keep them backgrounds moving
+    game.background.move(0,1)
+    game.background2.move(0,1)
+
+    # There is probably a better way to do this...
+    if game.background.rect.top >= 600:
+        game.background.rect.bottom = 0
+    if game.background2.rect.top >= 600:
+        game.background2.rect.bottom = 0
+
 
     # Keep them backgrounds moving
     game.background.move(0,1)

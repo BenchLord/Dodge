@@ -13,11 +13,6 @@ Controls
 * Arrow keys and WASD to move
 * Use Esc to exit
 
-Team
-===
-* Brandon Bench
-* Josh Beitler (made the starter kit that Cobra is based on)
-
 Ideas?
 ===
 Send me an email!
